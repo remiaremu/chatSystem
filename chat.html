@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Instant Conversation</title>
+    <link rel="stylesheet" type = "text/css" href="/home/ola/Desktop/ch.css">
+    
+</head>
+<body>
+    
+        <ul id="mes"></ul>
+    
+    
+    <form id="write">
+        
+        <textarea id="w" rows= "4" cols="25" >
+        </textarea>
+        <br/>
+        <button type="submit">Send</button>
+    </form>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src= "https://code.jquery.com/jquery-2.1.1.js"></script>
+    <script type="text/javascript">
+        var socket = io();
+        $('#write').submit(function(){
+            socket.emit('chatmessage',$('#w').val());
+            $('#w').val('');
+            return false;
+            
+        });
+        socket.on('receivemessage', function(msg){
+            $('#mes').append($('<li/>').text(msg));
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+{
+  "name": "nodetest",
+  "version": "0.0.0",
+  "description": "Test of node js chat",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ola Aremu",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "~4.10.4",
+    "socket.io": "~1.2.1"
+  }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div id="chat" style="display:none">
+         <ul id="mes"></ul>
+    
+    
+        <form id="write">
+        
+          <textarea id="w" rows= "4" cols="25" >
+          </textarea>
+          <br/>
+          <button type="submit">Send</button>
+          
+       </form>    
+    </div>
+    
+    <div id="login">
+    <form id=user>
+
+       Username:<input id='name'/>
+       Location:<input id='loc'/>
+       <button type='submit'>login</button>
+    
+    </form>
+    </div>
+    
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src= "https://code.jquery.com/jquery-2.1.1.js"></script>
+    <script type="text/javascript">
+        var socket = io();
+        var username = null;
+        var loct=null;
+        
+        $('#user').submit(function(){
+            
+            
+                    
+            
+            if ($('#name').val() && $('#loc').val()) {
+                loct = $("#loc").val();
+                username = $("#name").val();
+                socket.emit('username',username, loct);
+                
+               //or socket.emit('username',$("#name").val());
+                //username = $("#name").val();
+                
+                $("#chat").show();
+                
+                $("#login").hide();
+                return false;
+            }
+            
+            
+            
+        });
+        
+        $('#write').submit(function(){
+            socket.emit('chatmessage',username + " " +$('#w').val(),new Date());
+            $('#w').val('');
+            return false;
+            
+        });
+        
+        socket.on('receivemessage', function(msg,date){
+            $('#mes').append($('<li/>').text(msg));
+        });
+        
+    </script>      
+</body>
+
+</html>
